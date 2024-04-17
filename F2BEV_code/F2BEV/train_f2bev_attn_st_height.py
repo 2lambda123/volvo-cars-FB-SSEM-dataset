@@ -7,8 +7,10 @@ Created on Tue Dec 13 16:44:04 2022
 """
 
 import os
+import secrets
+
 os.environ["CUDA_VISIBLE_DEVICES"]="1"
-import torch,ntpath,random
+import torch,ntpath
 from torch import nn, optim
 import numpy as np
 from loader_single_task import UnityImageDataset
@@ -25,7 +27,7 @@ def numpy_sigmoid(x):
 
 
 def gamma_correction(image):
-    gamma = random.choice([0.8,1.0,1.2,1.4])
+    gamma = secrets.choice([0.8,1.0,1.2,1.4])
     return T.functional.adjust_gamma(image,gamma,gain = 1)
 
 def plt_pred_image(pred):

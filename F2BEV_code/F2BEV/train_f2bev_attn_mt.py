@@ -7,7 +7,7 @@ Created on Thu Feb 23 12:15:50 2023
 """
 
 
-import torch,ntpath,random
+import torch,ntpath
 from torch import nn, optim
 import numpy as np
 from loader_multi_task import UnityImageDataset
@@ -20,6 +20,7 @@ from model_f2bev_attn_mt import FisheyeBEVFormer
 import torchvision.transforms as T
 from losses.focal import BinaryFocalLoss, CrossEntropyFocalLoss #FocalLoss
 from losses.smoothness import MonodepthLoss
+import secrets
 
 def numpy_sigmoid(x):
     return 1/(1 + np.exp(-x))
@@ -27,7 +28,7 @@ def numpy_sigmoid(x):
 
 
 def gamma_correction(image):
-    gamma = random.choice([0.8,1.0,1.2,1.4])
+    gamma = secrets.choice([0.8,1.0,1.2,1.4])
     return T.functional.adjust_gamma(image,gamma,gain = 1)
 
 def plt_pred_image(pred):

@@ -16,7 +16,7 @@ from torch.utils.data import Dataset
 import numpy as np
 import os#,fnmatch
 from torchvision.io import read_image
-import random
+import secrets
 
 ##this will have seq len = 1
 
@@ -136,7 +136,7 @@ class UnityImageDataset(Dataset):
         ##first image
         
         index_list = list(range(idinseq-self.seq_len, idinseq))
-        random.shuffle(index_list)
+        secrets.SystemRandom().shuffle(index_list)
         index_list = sorted(index_list[1:])
         index_list.append(idinseq)
         
