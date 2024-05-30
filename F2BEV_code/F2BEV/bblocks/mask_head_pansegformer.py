@@ -5,6 +5,7 @@ Created on Mon Jan  9 15:00:54 2023
 
 @author: Ekta
 """
+import math
 
 """
 Copy-paste from torch.nn.Transformer, timm, with modifications:
@@ -377,7 +378,7 @@ def drop_path(x, drop_prob: float = 0., training: bool = False):
     changing the layer and argument names to 'drop path' rather than mix DropConnect as a layer name and use
     'survival rate' as the argument.
     """
-    if drop_prob == 0. or not training:
+    if math.isclose(drop_prob, 0., rel_tol=1e-09, abs_tol=0.0) or not training:
         return x
     keep_prob = 1 - drop_prob
     shape = (x.shape[0], ) + (1, ) * (
